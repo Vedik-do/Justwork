@@ -1,0 +1,76 @@
+plugins {
+    id 'eclipse'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+version = project.mod_version
+
+group = project.mod_group_id
+
+archivesBaseName = 'OverhauledMusic'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+minecraft {
+    mappings channel: 'official', version: project.minecraft_version
+    copyIdeResources = true
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'info'
+            mods {
+                overhauledmusic {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    def replaceProps = [
+        minecraft_version: project.minecraft_version,
+        forge_version: project.forge_version,
+        mod_id: project.mod_id,
+        mod_name: project.mod_name,
+        mod_version: project.mod_version
+    ]
+
+    inputs.properties replaceProps
+
+    filesMatching('META-INF/mods.toml') {
+        expand replaceProps
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+            'Specification-Title': project.mod_name,
+            'Specification-Vendor': 'overhauledmusic',
+            'Specification-Version': '1',
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.mod_version,
+            'Implementation-Vendor': 'overhauledmusic'
+        ])
+    }
+}

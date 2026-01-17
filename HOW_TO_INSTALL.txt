@@ -1,0 +1,29 @@
+OverhauledMusic (Forge 1.20.1)
+
+You asked for:
+- Mod = does the actions (biomes, bosses, low HP, structures)
+- Resource pack = contains the music (.ogg + sounds.json)
+
+What I made:
+1) OverhauledMusicForge1201_ACTIONS_ONLY (source)
+   - This is the Forge mod PROJECT (actions only). It does NOT include the music files.
+   - You build it into a .jar on your PC.
+
+2) OverhauledMusic_MusicPack_1.20.1 (resource pack)
+   - Put this ZIP in your .minecraft/resourcepacks folder and enable it.
+   - Replace any .ogg inside assets/overhauledmusic/sounds/ to change music.
+
+Install steps (game):
+- Install Forge for Minecraft 1.20.1
+- Put the built mod .jar into: .minecraft/mods
+- Put the resource pack zip into: .minecraft/resourcepacks and enable it in-game
+
+Build steps (PC) (required to create the mod .jar):
+- Install Java 17 (Temurin / Adoptium JDK 17)
+- Install Gradle 8.7 (or newer 8.x)
+- In a terminal inside OverhauledMusicForge1201_ACTIONS_ONLY:
+    gradle clean build
+- Your mod jar will appear under: build/libs/
+
+Important:
+- This environment can't build the jar (no Gradle distribution / no dependency downloads), so I'm delivering the source + the ready resource pack.
